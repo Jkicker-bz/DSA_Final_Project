@@ -27,6 +27,17 @@ void insert(TrieNode* root, string word) {
     curr->isEndOfWord = true;
 }
 
+bool search(TrieNode* root, string word) {
+    TrieNode* curr = root;
+    for (char c : word) {
+        int index = c - 'a';
+        if (curr->children[index] == nullptr)
+            return false;
+        curr = curr->children[index];
+    }
+    return curr->isEndOfWord;
+}
+
 int main(){
 
 
