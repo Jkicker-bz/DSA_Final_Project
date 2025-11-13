@@ -38,8 +38,18 @@ bool search(TrieNode* root, string word) {
     return curr->isEndOfWord;
 }
 
+void removeWord(TrieNode* root, string word) {
+    TrieNode* curr = root;
+    for (char c : word) {
+        int index = c - 'a';
+        if (curr->children[index] == nullptr)
+            return; // word not found
+        curr = curr->children[index];
+    }
+    curr->isEndOfWord = false; // unmark as a word
+}
 int main(){
 
 
 return 0;
-}
+}9
