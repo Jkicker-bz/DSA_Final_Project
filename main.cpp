@@ -49,7 +49,21 @@ void removeWord(TrieNode* root, string word) {
     curr->isEndOfWord = false; // unmark as a word
 }
 int main(){
+    TrieNode* root = createNode();
 
+    insert(root, "apple");
+    insert(root, "app");
+    insert(root, "bat");
+
+    cout << boolalpha; // print true/false instead of 1/0
+    cout << "Search 'apple': " << search(root, "apple") << endl; // true
+    cout << "Search 'app': "   << search(root, "app")   << endl; // true
+    cout << "Search 'bat': "   << search(root, "bat")   << endl; // true
+    cout << "Search 'bad': "   << search(root, "bad")   << endl; // false
+
+    removeWord(root, "app");
+    cout << "After deleting 'app': " << search(root, "app") << endl; // false
+    cout << "But 'apple' still exists: " << search(root, "apple") << endl; // true
 
 return 0;
-}9
+}
