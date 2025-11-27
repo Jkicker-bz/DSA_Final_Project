@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 // Each Trie Node can store up to 26 letters (a-x)
@@ -71,6 +72,18 @@ void dfs(TrieNode* node, string current, vector<string>& results) {
         }
     }
 }
+
+vector<string> autocomplete(TrieNode* root, string prefix) {
+    vector<string> results;
+
+    TrieNode* prefixNode = findPrefixNode(root, prefix);
+    if (prefixNode == nullptr)
+        return results; // empty list
+
+    dfs(prefixNode, prefix, results);
+    return results;
+}
+
 int main(){
     TrieNode* root = createNode();
 
