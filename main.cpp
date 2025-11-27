@@ -4,7 +4,7 @@
 using namespace std;
 
 // Each Trie Node can store up to 26 letters (a-x)
-Struct TrieNode {
+struct TrieNode {
      TrieNode* children[26];
      bool isEndOfWord;
 };
@@ -22,7 +22,7 @@ void insert(TrieNode* root, string word) {
     for (char c : word) {
         int index = c - 'a';
         if (curr->children[index] == nullptr)
-            curr->children[index] = createNode();
+            curr->children[index] = getNode();
         curr = curr->children[index];
     }
     curr->isEndOfWord = true;
@@ -85,21 +85,21 @@ vector<string> autocomplete(TrieNode* root, string prefix) {
 }
 
 int main(){
-    TrieNode* root = createNode();
-
+    TrieNode* root = getNode();
+    // Insert sample dictionary
     insert(root, "apple");
     insert(root, "app");
+    insert(root, "apply");
+    insert(root, "apt");
     insert(root, "bat");
+    insert(root, "batch");
+    insert(root, "banana");
 
-    cout << boolalpha; // print true/false instead of 1/0
-    cout << "Search 'apple': " << search(root, "apple") << endl; // true
-    cout << "Search 'app': "   << search(root, "app")   << endl; // true
-    cout << "Search 'bat': "   << search(root, "bat")   << endl; // true
-    cout << "Search 'bad': "   << search(root, "bad")   << endl; // false
+    string prefix = "ap";
+    vector<string> suggestions = autocomplete(root, prefix);
 
-    removeWord(root, "app");
-    cout << "After deleting 'app': " << search(root, "app") << endl; // false
-    cout << "But 'apple' still exists: " << search(root, "apple") << endl; // true
-
+    cout << "Autocomplete suggestions for \"" << prefix << "\":" << endl;
+    for (string s : suggestions)
+        cout << " - " << s << endl;
 return 0;
 }
