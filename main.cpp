@@ -60,6 +60,17 @@ TrieNode* findPrefixNode(TrieNode* root, string prefix) {
     return curr;
 }
 
+void dfs(TrieNode* node, string current, vector<string>& results) {
+    if (node->isEndOfWord)
+        results.push_back(current);
+
+    for (int i = 0; i < 26; i++) {
+        if (node->children[i] != nullptr) {
+            char nextChar = 'a' + i;
+            dfs(node->children[i], current + nextChar, results);
+        }
+    }
+}
 int main(){
     TrieNode* root = createNode();
 
