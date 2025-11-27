@@ -48,6 +48,18 @@ void removeWord(TrieNode* root, string word) {
     }
     curr->isEndOfWord = false; // unmark as a word
 }
+
+TrieNode* findPrefixNode(TrieNode* root, string prefix) {
+    TrieNode* curr = root;
+    for (char c : prefix) {
+        int index = c - 'a';
+        if (curr->children[index] == nullptr)
+            return nullptr; // prefix not found
+        curr = curr->children[index];
+    }
+    return curr;
+}
+
 int main(){
     TrieNode* root = createNode();
 
